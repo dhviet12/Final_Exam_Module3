@@ -29,7 +29,19 @@ public class ProductServlet extends HttpServlet {
             case "edit":
                 editProduct(request, response);
                 break;
+            case "search":
+                searchProduct(request,response);
+                break;
         }
+
+    }
+
+    private void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name =request.getParameter("search");
+        List<Product> productList = productService.findByName(name);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product.jsp");
+        request.setAttribute("list",productList);
+        requestDispatcher.forward(request,response);
 
     }
 

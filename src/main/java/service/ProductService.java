@@ -62,7 +62,7 @@ public class ProductService implements IProductService {
                 String color = resultSet.getString("color");
                 String description = resultSet.getString("description");
                 int category = resultSet.getInt("category");
-                product = new Product(productName,price,quantity,color,description,category);
+                product = new Product(productName, price, quantity, color, description, category);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -123,6 +123,26 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> findByName(String name) {
-        return null;
+        Connection connection = getConnection();
+        List<Product> productList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product where productName like ?");
+            name = "%" + name + "%";
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int productId = resultSet.getInt("productId");
+                String productName = resultSet.getString("productName");
+                double price = resultSet.getDouble("price");
+                int quantity = resultSet.getInt("quantity");
+                String color = resultSet.getString("color");
+                String description = resultSet.getString("description");
+                int category = resultSet.getInt("category");
+                productList.add(new Product(productId, productName, price, quantity, color, description, category));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return productList;
     }
 }

@@ -14,9 +14,9 @@
     </style>
 </head>
 <body>
-<a class="btn btn-primary" href="/product?action=create" role="button">Create Product</a>
-<form>
+<form method="post" action="/product?action=search">
     <input type="text" name="search" id ="search" placeholder="type name product">
+    <input type="submit" name="submit" id="submit" value="Search">
 </form>
 
 
@@ -52,6 +52,7 @@
     </c:forEach>
     </tbody>
 </table>
+<a class="btn btn-primary" href="/product?action=create" role="button">Create Product</a>
 
 </body>
 </html>
