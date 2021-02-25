@@ -1,0 +1,40 @@
+create database final_exam_module3;
+
+use final_exam_module3;
+
+create table product (
+    productId int primary key auto_increment,
+    productName varchar(100),
+    price double,
+    quantity int,
+    color varchar(20),
+    description varchar(100),
+    category int
+);
+
+insert into product (productName,
+                     price,
+                     quantity,
+                     color,
+                     description,
+                     category) values(
+                                     'Iphone 11',
+                                       799,
+                                       12,
+                                       'Black',
+                                       'From USA',
+                                       1);
+
+create table category(
+    categoryId int primary key auto_increment,
+    categoryName varchar(50)
+);
+
+insert into category(categoryName) values ('Phone'),('Television'),('Watch'),('Laptop');
+alter table product add foreign key (category) references  category(categoryId);
+
+select * from product;
+
+insert into product (productName, price, quantity, color, description, category)  values (?,?,?,?,?,?);
+
+update product set productName = ?, price= ?, quantity= ?, color= ?,description= ?,category= ? where productId= ?;
